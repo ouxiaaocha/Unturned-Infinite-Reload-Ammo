@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "换弹式无限子弹", "换弹式无限子弹.csproj", "{88CE7FB6-7B1D-418A-B6F2-6D14937422C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88CE7FB6-7B1D-418A-B6F2-6D14937422C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CE7FB6-7B1D-418A-B6F2-6D14937422C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CE7FB6-7B1D-418A-B6F2-6D14937422C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CE7FB6-7B1D-418A-B6F2-6D14937422C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

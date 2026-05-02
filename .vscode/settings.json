@@ -1,0 +1,8 @@
+{
+  "dotnet.defaultSolution": "换弹式无限子弹.sln",
+  "files.encoding": "utf8",
+  "terminal.integrated.env.windows": {
+    "DOTNET_ROOT": "${env:USERPROFILE}\\.dotnet",
+    "PATH": "${env:USERPROFILE}\\.dotnet;${env:PATH}"
+  }
+}
