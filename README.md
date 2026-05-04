@@ -1,15 +1,19 @@
-# Unturned Infinite Reload Ammo
+<p align="center">
+  <img src="docs/assets/hero-infinite-reload-ammo.png" alt="Unturned Infinite Reload Ammo" width="100%">
+</p>
+
+<h1 align="center">Unturned Infinite Reload Ammo</h1>
 
 <p align="center">
   <strong>换弹式无限子弹插件</strong><br>
-  为 Unturned Rocket 服务器提供更自然的无限弹匣体验。
+  为 Unturned Rocket 服务器提供贴近原版节奏的无限弹匣体验。
 </p>
 
 <p align="center">
-  <img alt="Target Framework" src="https://img.shields.io/badge/.NET%20Framework-4.8-512BD4?style=flat-square">
-  <img alt="Rocket" src="https://img.shields.io/badge/Rocket-Unturned-2F855A?style=flat-square">
-  <img alt="License" src="https://img.shields.io/badge/License-MIT-111827?style=flat-square">
-  <img alt="Version" src="https://img.shields.io/badge/Version-1.0.0-2563EB?style=flat-square">
+  <img alt="Target Framework" src="https://img.shields.io/badge/.NET%20Framework-4.8-38BDF8?style=for-the-badge&labelColor=0F172A">
+  <img alt="Rocket" src="https://img.shields.io/badge/Rocket-Unturned-22D3EE?style=for-the-badge&labelColor=0F172A">
+  <img alt="Version" src="https://img.shields.io/badge/Version-1.0.0-60A5FA?style=for-the-badge&labelColor=0F172A">
+  <img alt="License" src="https://img.shields.io/badge/License-MIT-94A3B8?style=for-the-badge&labelColor=0F172A">
 </p>
 
 ---
@@ -18,7 +22,7 @@
 
 `Unturned Infinite Reload Ammo` 是一个用于 Unturned Rocket 服务器的换弹式无限子弹插件。
 
-它不会跳过玩家原本的换弹动作，而是在玩家换弹时自动补满旧弹匣与新弹匣，让无限子弹效果更接近正常游玩节奏，适合 PVE、娱乐服、活动服或特殊职业玩法。
+插件不会跳过玩家原本的换弹动作，而是在玩家换弹时自动补满旧弹匣与新弹匣，让无限子弹效果保持自然节奏，适合 PVE、娱乐服、活动服或特殊职业玩法。
 
 ## 功能亮点
 
@@ -31,6 +35,24 @@
 | 武器黑名单 | 黑名单内武器不会触发无限子弹效果。 |
 | 聊天样式配置 | 支持自定义消息颜色与消息图标。 |
 | 自动说明文件 | 插件加载后会生成中文使用说明文件，便于服主查看。 |
+
+## 效果展示
+
+### 游戏内启用
+
+![游戏内启用无限子弹](docs/assets/gameplay-enabled.png)
+
+### 黑名单拦截
+
+![武器黑名单拦截提示](docs/assets/blacklist-blocked.png)
+
+### 玩家反馈
+
+![玩家开关与聊天反馈](docs/assets/player-feedback.png)
+
+### 服务器加载
+
+![服务器加载成功](docs/assets/server-loaded.png)
 
 ## 运行环境
 
