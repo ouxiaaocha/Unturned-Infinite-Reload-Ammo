@@ -7,6 +7,7 @@ using Rocket.Unturned.Player;
 using SDG.Unturned;
 using Steamworks;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 using ZXLogger = Rocket.Core.Logging.Logger;
@@ -17,9 +18,9 @@ namespace ZXInfiniteReloadAmmo
     {
         public static ZXInfiniteReloadAmmoPlugin Instance { get; private set; }
 
-        private readonly HashSet<CSteamID> _hookedEquipEvent = new HashSet<CSteamID>();
+        private readonly ConcurrentDictionary<CSteamID, byte> _hookedEquipEvent = new ConcurrentDictionary<CSteamID, byte>();
 
-        private readonly HashSet<CSteamID> _enabledPlayers = new HashSet<CSteamID>();
+        private readonly ConcurrentDictionary<CSteamID, byte> _enabledPlayers = new ConcurrentDictionary<CSteamID, byte>();
 
         public override TranslationList DefaultTranslations => new TranslationList
         {
@@ -53,10 +54,17 @@ namespace ZXInfiniteReloadAmmo
                 if (player == null)
                     continue;
 
-                HookEquipEvent(player);
+                try
+                {
+                    HookEquipEvent(player);
 
-                if (Configuration.Instance.AutoEnableOnJoin)
-                    SetInfiniteEnabled(player, true);
+                    if (Configuration.Instance.AutoEnableOnJoin)
+                        SetInfiniteEnabled(player, true);
+                }
+                catch (Exception ex)
+                {
+                    ZXLogger.LogException(ex);
+                }
             }
 
             ZXUsageDocumentWriter.EnsureUsageFile(this, Configuration.Instance);
@@ -108,7 +116,7 @@ namespace ZXInfiniteReloadAmmo
         {
             UnhookEquipEvent(player);
             if (player != null)
-                _enabledPlayers.Remove(player.CSteamID);
+                _enabledPlayers.TryRemove(player.CSteamID, out _);
         }
 
         private void HookEquipEvent(UnturnedPlayer player)
@@ -119,11 +127,11 @@ namespace ZXInfiniteReloadAmmo
                     return;
 
                 var id = player.CSteamID;
-                if (_hookedEquipEvent.Contains(id))
+                if (_hookedEquipEvent.ContainsKey(id))
                     return;
 
                 player.Player.equipment.onEquipRequested += OnEquipRequested;
-                _hookedEquipEvent.Add(id);
+                _hookedEquipEvent.TryAdd(id, 0);
             }
             catch (Exception ex)
             {
@@ -139,11 +147,11 @@ namespace ZXInfiniteReloadAmmo
                     return;
 
                 var id = player.CSteamID;
-                if (!_hookedEquipEvent.Contains(id))
+                if (!_hookedEquipEvent.ContainsKey(id))
                     return;
 
                 player.Player.equipment.onEquipRequested -= OnEquipRequested;
-                _hookedEquipEvent.Remove(id);
+                _hookedEquipEvent.TryRemove(id, out _);
             }
             catch (Exception ex)
             {
@@ -171,7 +179,7 @@ namespace ZXInfiniteReloadAmmo
 
         public bool IsInfiniteEnabled(UnturnedPlayer player)
         {
-            return player != null && _enabledPlayers.Contains(player.CSteamID);
+            return player != null && _enabledPlayers.ContainsKey(player.CSteamID);
         }
 
         public void SetInfiniteEnabled(UnturnedPlayer player, bool enabled)
@@ -180,9 +188,9 @@ namespace ZXInfiniteReloadAmmo
                 return;
 
             if (enabled)
-                _enabledPlayers.Add(player.CSteamID);
+                _enabledPlayers.TryAdd(player.CSteamID, 0);
             else
-                _enabledPlayers.Remove(player.CSteamID);
+                _enabledPlayers.TryRemove(player.CSteamID, out _);
         }
 
         private Color GetMessageColor()
@@ -320,6 +328,7 @@ namespace ZXInfiniteReloadAmmo
             if (!(asset is ItemMagazineAsset))
                 return;
 
+            // asset.amount 对 ItemMagazineAsset 即为弹匣容量
             item.amount = asset.amount;
         }
     }

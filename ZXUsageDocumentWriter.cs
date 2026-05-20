@@ -25,8 +25,9 @@ namespace ZXInfiniteReloadAmmo
 
                 File.WriteAllText(usageFilePath, content, new UTF8Encoding(true));
             }
-            catch
+            catch (Exception ex)
             {
+                Rocket.Core.Logging.Logger.LogException(ex);
             }
         }
 

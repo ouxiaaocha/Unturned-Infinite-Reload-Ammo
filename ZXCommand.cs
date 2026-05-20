@@ -10,11 +10,15 @@ namespace ZXInfiniteReloadAmmo
         public string Help => "无限子弹开关";
         public string Syntax => "/ZX <ON|OFF>";
         public System.Collections.Generic.List<string> Aliases => new System.Collections.Generic.List<string>();
-        public System.Collections.Generic.List<string> Permissions => new System.Collections.Generic.List<string>();
+        public System.Collections.Generic.List<string> Permissions => new System.Collections.Generic.List<string>
+        {
+            ZXInfiniteReloadAmmoPlugin.Instance?.Configuration?.Instance?.Permission ?? "ZX"
+        };
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
-            var player = (UnturnedPlayer)caller;
+            var player = caller as UnturnedPlayer;
+            if (player == null) return;
             var plugin = ZXInfiniteReloadAmmoPlugin.Instance;
 
             if (plugin == null || plugin.Configuration?.Instance == null)
